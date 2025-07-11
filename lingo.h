@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <ncurses.h>
+#include <locale.h>
 
 /*定数定義*/
 #define MAX_WORDS 30

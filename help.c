@@ -50,11 +50,10 @@ void show_kakin_screen(GameData *game_data) {
 
 /*課金インターフェース表示*/
 void display_kakin_interface(void) {
-    mvprintw(3, 15, "=== 課金システム ===");
+    mvprintw(3, 15, "=== 課金===");
     mvprintw(5, 10, "追加のヒント文字を購入できます");
-    mvprintw(7, 10, "価格: 100円");
+    mvprintw(7, 10, "価格: ¥100,000");
     mvprintw(8, 10, "効果: 正解単語の2文字目も表示されます");
-    mvprintw(10, 10, "注意: これは実際の課金ではありません");
     mvprintw(12, 10, "課金しますか？ (y/n): ");
 }
 

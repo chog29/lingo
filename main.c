@@ -3,6 +3,8 @@
 /*メイン関数*/
 int main(int argc, char *argv[]) {
     GameData game_data;
+
+    setlocale(LC_ALL, "");
     
     /*引数の検証*/
     if (!validate_arguments(argc, argv)) {
