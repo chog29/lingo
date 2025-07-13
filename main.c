@@ -112,6 +112,10 @@ void manage_screen_transition(GameData *game_data) {
             show_menu_screen(game_data);
             break;
         case GAME_STATE:
+            /* ゲーム開始前に状態を確実にリセット */
+            if (game_data->attempt_count == 0 && !game_data->game_won) {
+                initialize_game_round(game_data);
+            }
             run_game_screen(game_data);
             break;
         case HELP_STATE:
@@ -125,6 +129,8 @@ void manage_screen_transition(GameData *game_data) {
         case WIN_STATE:
         case LOSE_STATE:
             display_result_message(game_data);
+            /* ゲーム終了後に状態をリセット */
+            reset_game_state(game_data);
             game_data->screen_state = MENU_STATE;
             break;
         default:
@@ -151,4 +157,16 @@ void end_ncurses(void) {
 /*メモリ解放*/
 void free_memory(GameData *game_data) {
     /*静的配列のため特に処理なし*/
+}
+
+/* ゲーム状態リセット関数を追加 */
+void reset_game_state(GameData *game_data) {
+    game_data->attempt_count = 0;
+    game_data->game_won = false;
+    
+    /* display_wordを初期状態に戻す */
+    for (int i = 0; i < WORD_LENGTH; i++) {
+        game_data->display_word[i] = '_';
+    }
+    game_data->display_word[WORD_LENGTH] = '\0';
 }

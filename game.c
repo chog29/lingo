@@ -21,6 +21,9 @@ void initialize_game_round(GameData *game_data) {
     choose_random_word(game_data);
     reset_attempt_count(game_data);
     prepare_display_hints(game_data);
+
+    game_data->game_won = false;
+    game_data->screen_state = GAME_STATE;
 }
 
 /* ランダム単語選択 */
@@ -43,11 +46,21 @@ void reset_attempt_count(GameData *game_data) {
 void prepare_display_hints(GameData *game_data) {
     int i;
     
-    game_data->display_word[0] = game_data->answer_word[0];
-    for (i = 1; i < WORD_LENGTH; i++) {
+    /* display_wordを完全に初期化 */
+    for (i = 0; i < WORD_LENGTH; i++) {
         game_data->display_word[i] = '_';
     }
     game_data->display_word[WORD_LENGTH] = '\0';
+    
+    /* 最初の文字のみ表示 */
+    game_data->display_word[0] = game_data->answer_word[0];
+    
+    /* 課金機能でヒントが追加されている場合の処理 */
+    if (game_data->hint_count > 1) {
+        for (i = 1; i < game_data->hint_count && i < WORD_LENGTH; i++) {
+            game_data->display_word[i] = game_data->answer_word[i];
+        }
+    }
 }
 
 /* ゲームインターフェース表示 */
@@ -157,9 +170,8 @@ void increment_attempt(GameData *game_data) {
 
 /* ゲーム終了チェック */
 bool check_game_end(GameData *game_data) {
-    /* 勝利状態がすでに設定されているか、または最大試行回数に達したかチェック */
+    /* 勝利状態がすでに設定されているかチェック */
     if (game_data->game_won) {
-        /* process_guessで勝利状態が設定されたのでゲーム終了 */
         return true;
     }
 

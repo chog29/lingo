@@ -34,7 +34,7 @@ int read_words_to_array(FILE *fp, char word_list[][WORD_LENGTH + 1]) {
             count++;
         }
     }
-    printf("Loaded %d words from file.\n", count);
+    /*printf("Loaded %d words from file.\n", count);*/
     return count;
 }
 

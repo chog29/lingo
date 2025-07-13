@@ -55,6 +55,7 @@ void update_game_state(GameData *game_data);
 void cleanup_and_exit(GameData *game_data);
 void end_ncurses(void);
 void free_memory(GameData *game_data);
+void reset_game_state(GameData *game_data);
 
 /*2. データ管理モジュール*/
 int load_word_list(char word_list[][WORD_LENGTH + 1]);
