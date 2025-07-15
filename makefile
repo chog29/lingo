@@ -1,4 +1,4 @@
-lingo.exe: data.o game.o help.o judge.o main.o menu.o
+lingo: data.o game.o help.o judge.o main.o menu.o
 		gcc -o lingo data.o game.o help.o judge.o main.o menu.o -lncursesw
 data.o: data.c
 		gcc -c data.c
