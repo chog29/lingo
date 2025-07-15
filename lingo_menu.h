@@ -1,5 +1,3 @@
-#ifndef F10A27FD_59E5_4F3F_888F_6A3F2C3FDAA1
-#define F10A27FD_59E5_4F3F_888F_6A3F2C3FDAA1
 #ifndef LINGO_MENU_H
 #define LINGO_MENU_H
 
@@ -20,6 +18,3 @@ void execute_selected_option(GameData *game_data);
 void set_next_screen(GameData *game_data, ScreenState next_state);
 
 #endif
-
-
-#endif /* F10A27FD_59E5_4F3F_888F_6A3F2C3FDAA1 */

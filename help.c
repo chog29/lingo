@@ -1,12 +1,12 @@
 #include "lingo.h"
 
-void show_help_screen(void) {
+void show_help_screen(void){
     clear_screen_buffer();
     display_game_rules();
     wait_for_return_key();
 }
 
-void display_game_rules(void) {
+void display_game_rules(void){
     mvprintw(2, 10, "=== LINGO GAME HELP ===");
     mvprintw(4, 5, "【ゲームの目的】");
     mvprintw(5, 5, "隠された5文字の英単語を当てるゲーム");
@@ -25,16 +25,16 @@ void display_game_rules(void) {
     mvprintw(22, 5, "課金すると何かが起こる...");
 }
 
-void wait_for_return_key(void) {
+void wait_for_return_key(void){
     mvprintw(24, 10, "メニューに戻るには何かキーを押してください...");
     refresh();
     getch();
 }
 
-void show_kakin_screen(GameData *game_data) {
+void show_kakin_screen(GameData *game_data){
     clear_screen_buffer();
     display_kakin_interface();
-    if (simulate_payment_process()) {
+    if(simulate_payment_process()){
         add_hint_characters(game_data);
     }
     mvprintw(15, 10, "何かキーを押してメニューに戻る...");
@@ -42,7 +42,7 @@ void show_kakin_screen(GameData *game_data) {
     getch();
 }
 
-void display_kakin_interface(void) {
+void display_kakin_interface(void){
     mvprintw(3, 15, "=== 課金===");
     /*mvprintw(5, 10, "追加のヒント文字を購入できます");*/
     mvprintw(7, 10, "価格: ¥100,000");
@@ -50,10 +50,10 @@ void display_kakin_interface(void) {
     mvprintw(12, 10, "課金しますか？ (y/n): ");
 }
 
-bool simulate_payment_process(void) {
+bool simulate_payment_process(void){
     int input = getch();
-    
-    if (input == 'y' || input == 'Y') {
+
+    if(input == 'y'|| input == 'Y'){
         mvprintw(13, 10, "課金処理中...");
         refresh();
         for (int i = 0; i < 1000000000; i++) {
@@ -63,35 +63,33 @@ bool simulate_payment_process(void) {
         refresh();
         return true;
     }
-    
     mvprintw(13, 10, "課金をキャンセルしました");
     refresh();
     return false;
 }
 
-void add_hint_characters(GameData *game_data) {
+void add_hint_characters(GameData *game_data){
     game_data->hint_count++;
 
-    if (strlen(game_data->answer_word) >= 2) {
+    if(strlen(game_data->answer_word) >= 2){
         game_data->display_word[1] = game_data->answer_word[1];
     }
     mvprintw(16, 10, "ヒントが追加されました！");
-    /*mvprintw(17, 10, "2文字目も表示されるようになります");*/
 }
 
-void screen_control_utils(void) {
+void screen_control_utils(void){
     clear_screen_buffer();
     refresh_display();
 }
 
-void clear_screen_buffer(void) {
+void clear_screen_buffer(void){
     clear();
 }
 
-void refresh_display(void) {
+void refresh_display(void){
     refresh();
 }
 
-void set_cursor_position(int y, int x) {
-    move(y, x);
+void set_cursor_position(int y, int x){
+    move(y,x);
 }
